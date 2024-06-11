@@ -40,6 +40,26 @@ nav {
   }
 }
 
+.success_message {
+  background-color: #dff0d8;
+  color: #3c763d;
+  padding: 10px 15px;
+  border: 1px solid #d6e9c6;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  width: fit-content;
+}
+
+/* --- verberg het Cargo Lading (kg) input veld. Toon het wanneer 'Boeing 737-700' word geselecteerd --- */
+.cargo_lading {
+  display: none;
+}
+
+input.cargo_lading {
+  margin-bottom: 20px;
+}
+
 /* --- login form index.php --- */
 .login_form {
   display: flex;
@@ -108,12 +128,15 @@ section.toon_vluchten {
 }
 
 .table-container {
+  max-height: 1200px;
   overflow-x: auto;
+  box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
+    rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+  border-radius: 6px;
 }
 
-table {
+.table-container  table {
   border-collapse: collapse;
-  box-shadow: 0 0 3px #ccc;
 }
 
 th {
@@ -131,7 +154,6 @@ td {
   text-align: left;
 }
 
-
 section.boek_vlucht {
   max-width: 1300px;
   margin: 40px auto 20px;
@@ -142,7 +164,8 @@ section.boek_vlucht {
     display: flex;
     flex-direction: column;
     background-color: #f3f0f0;
-    box-shadow: 0 0 3px #ccc;
+    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
+      rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
     border-radius: 6px;
     padding: 20px;
   }
@@ -152,9 +175,11 @@ section.boek_vlucht {
     margin-bottom: 20px;
   }
 
-  & input {
-    border: none;
-    padding: 8px 16px;
+  & input,
+  select {
+    border: 1px solid #dddddde0;
+    border-radius: 6px;
+    padding: 8px;
   }
 
   & input[type="submit"] {
@@ -168,4 +193,19 @@ section.boek_vlucht {
   & input[type="submit"]:hover {
     opacity: 0.9;
   }
+}
+
+@media only screen and (max-width: 600px) {
+  nav img {
+    width: 120px;
+  }
+  section.boek_vlucht form {
+    width: 99%;
+  }
+}
+
+footer {
+  margin: 50px 0 6px 0;
+  text-align: center;
+  color: #333;
 }

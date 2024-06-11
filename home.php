@@ -37,34 +37,34 @@
 				echo "<table>
                     <tr>
                         <th>ID</th>
+                        <th>Vliegtuig Type</th>
                         <th>Vertrek Tijd</th>
                         <th>Aankomst Tijd</th>
                         <th>Vertrek Luchthaven</th>
                         <th>Aankomst Luchthaven</th>
                         <th>Alternatieve Luchthaven</th>
-                        <th>Vliegtuig Type</th>
                         <th>Piloot 1</th>
                         <th>Piloot 2</th>
                         <th>Aantal Passagiers</th>
                         <th>Aantal Stewardessen</th>
                         <th>Cargo Lading (kg)</th>
-                        <th>Grondpersoneel Aantal</th>
+                        <th>Aantal Grondpersoneel</th>
                     </tr>";
 				while ($row = $result->fetch_assoc()) {
 					echo "<tr>
                         <td>{$row['id']}</td>
+                        <td>{$row['vliegtuig_type']}</td>
                         <td>{$row['vertrek_tijd']}</td>
                         <td>{$row['aankomst_tijd']}</td>
                         <td>{$row['vertrek_luchthaven']}</td>
                         <td>{$row['aankomst_luchthaven']}</td>
                         <td>{$row['alternatieve_luchthaven']}</td>
-                        <td>{$row['vliegtuig_type']}</td>
                         <td>{$row['piloot1']}</td>
                         <td>{$row['piloot2']}</td>
                         <td>{$row['aantal_passagiers']}</td>
                         <td>{$row['aantal_stewardessen']}</td>
                         <td>{$row['cargo_lading_kg']}</td>
-                        <td>{$row['grondpersoneel_aantal']}</td>
+                        <td>2</td>
                       </tr>";
 				}
 				echo "</table>";
@@ -80,37 +80,65 @@
 	<!-- boek vluchten -->
 	<section class="boek_vlucht">
 
+		<?php
+		// succes message
+		if (isset($_SESSION['success'])) {
+			echo '<p class="success_message">' . $_SESSION['success'] . '</p>';
+			unset($_SESSION['success']);
+		}
+		?>
+
 		<form action="process/boek_vlucht.php" method="post">
 			<h2><i class="fa-solid fa-plane-up"></i> Vlucht Toevoegen</h2>
-			<label for="vertrek_tijd">Vertrek datum</label>
-			<input type="datetime-local" id="vertrek_tijd" name="vertrek_tijd" required><br>
-			<label for="aankomst_tijd">Aankomst datum</label>
-			<input type="datetime-local" id="aankomst_tijd" name="aankomst_tijd" required><br>
-			<label for="vertrek_luchthaven">Vertrek luchthaven</label>
-			<input type="text" id="vertrek_luchthaven" name="vertrek_luchthaven" required><br>
-			<label for="aankomst_luchthaven">Aankomst luchthaven</label>
-			<input type="text" id="aankomst_luchthaven" name="aankomst_luchthaven" required><br>
-			<label for="alternatieve_luchthaven">Alternatieve luchthaven</label>
-			<input type="text" id="alternatieve_luchthaven" name="alternatieve_luchthaven"><br>
-			<label for="vliegtuig_type">Vliegtuig Type</label>
-			<input type="text" id="vliegtuig_type" name="vliegtuig_type" required><br>
-			<label for="piloot1">Piloot 1:</label>
-			<input type="text" id="piloot1" name="piloot1" required><br>
-			<label for="piloot2">Piloot 2:</label>
-			<input type="text" id="piloot2" name="piloot2" required><br>
-			<label for="aantal_passagiers">Aantal passagiers</label>
-			<input type="number" id="aantal_passagiers" name="aantal_passagiers"><br>
-			<label for="aantal_stewardessen">Aantal stewardessen</label>
-			<input type="number" id="aantal_stewardessen" name="aantal_stewardessen"><br>
-			<label for="cargo_lading_kg">Cargo lading (kg)</label>
-			<input type="number" id="cargo_lading_kg" name="cargo_lading_kg"><br>
-			<label for="grondpersoneel_aantal">Aantal grondpersoneel</label>
-			<input type="number" id="grondpersoneel_aantal" name="grondpersoneel_aantal" required><br>
+			<label for="vertrek_tijd">Vertrek Datum</label>
+			<input type="datetime-local" name="vertrek_tijd" required><br>
+			<label for="aankomst_tijd">Aankomst Datum</label>
+			<input type="datetime-local" name="aankomst_tijd" required><br>
+			<label for="vertrek_luchthaven">Vertrek Luchthaven</label>
+			<input type="text" name="vertrek_luchthaven" required><br>
+			<label for="aankomst_luchthaven">Aankomst Luchthaven</label>
+			<input type="text" name="aankomst_luchthaven" required><br>
+			<label for="alternatieve_luchthaven">Alternatieve Luchthaven</label>
+			<input type="text" name="alternatieve_luchthaven"><br>
+			<label for="alternatieve_luchthaven">Selecteer Vliegtuigtype</label>
+			<select name="vliegtuig_type" class="vliegtuigTypes">
+				<option value="A320">A320</option>
+				<option value="Boeing 737-800">Boeing 737-800</option>
+				<option value="ATR-72">ATR-72</option>
+				<option value="Boeing 737-700">Boeing 737-700</option>
+			</select><br>
+			<label for="piloot1">Piloot</label>
+			<input type="text" name="piloot1" required><br>
+			<label for="piloot2">Copiloot</label>
+			<input type="text" name="piloot2" required><br>
+			<label for="aantal_passagiers">Aantal Passagiers</label>
+			<input type="number" name="aantal_passagiers" value="0"><br>
+			<label for="cargo_lading_kg" class="cargo_lading">Cargo Lading (kg)</label>
+			<input type="number" name="cargo_lading_kg" class="cargo_lading">
 			<input type="submit" value="Toevoegen">
 		</form>
 
 	</section>
 
+	<script>
+		const el = document.querySelector('.vliegtuigTypes');
+		const boxes = document.querySelectorAll('.cargo_lading');
+
+		el.addEventListener('change', function handleChange(event) {
+			const selectedValue = event.target.value;
+			boxes.forEach(function(box) {
+				if (selectedValue === 'Boeing 737-700') {
+					box.style.display = 'block';
+				} else {
+					box.style.display = 'none';
+				}
+			});
+		});
+	</script>
+
+	<footer>
+		© 2024 MboAir
+	</footer>
 </body>
 
 </html>

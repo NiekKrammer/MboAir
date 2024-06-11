@@ -1,9 +1,7 @@
 <?php
 include_once '../includes/dbconnect.php';
 
-// Controleer of het formulier is ingediend
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Haal de gegevens van het formulier op en ontsnap ze
     $vertrek_tijd = mysqli_real_escape_string($conn, $_POST['vertrek_tijd']);
     $aankomst_tijd = mysqli_real_escape_string($conn, $_POST['aankomst_tijd']);
     $vertrek_luchthaven = mysqli_real_escape_string($conn, $_POST['vertrek_luchthaven']);
@@ -13,26 +11,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $piloot1 = mysqli_real_escape_string($conn, $_POST['piloot1']);
     $piloot2 = mysqli_real_escape_string($conn, $_POST['piloot2']);
     $aantal_passagiers = intval($_POST['aantal_passagiers']);
-    $aantal_stewardessen = intval($_POST['aantal_stewardessen']);
-    $cargo_lading_kg = intval($_POST['cargo_lading_kg']);
-    $grondpersoneel_aantal = intval($_POST['grondpersoneel_aantal']);
+    
+    // Check if cargo_lading_kg is set and not empty, else set to null
+    if (isset($_POST['cargo_lading_kg']) && $_POST['cargo_lading_kg'] !== '') {
+        $cargo_lading_kg = intval($_POST['cargo_lading_kg']);
+    } else {
+        $cargo_lading_kg = null;
+    }
+    
+    // Calculate the number of stewardesses
+    $aantal_stewardessen = ceil($aantal_passagiers / 60);
 
-    // Bereid de SQL-instructie voor
-    $stmt = $conn->prepare("INSERT INTO vluchten (vertrek_tijd, aankomst_tijd, vertrek_luchthaven, aankomst_luchthaven, alternatieve_luchthaven, vliegtuig_type, piloot1, piloot2, aantal_passagiers, aantal_stewardessen, cargo_lading_kg, grondpersoneel_aantal) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO vluchten (vertrek_tijd, aankomst_tijd, vertrek_luchthaven, aankomst_luchthaven, alternatieve_luchthaven, vliegtuig_type, piloot1, piloot2, aantal_passagiers, cargo_lading_kg, aantal_stewardessen) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-    // Controleer of de voorbereiding is geslaagd
     if ($stmt) {
-        // Bind parameters
-        $stmt->bind_param("ssssssssiiii", $vertrek_tijd, $aankomst_tijd, $vertrek_luchthaven, $aankomst_luchthaven, $alternatieve_luchthaven, $vliegtuig_type, $piloot1, $piloot2, $aantal_passagiers, $aantal_stewardessen, $cargo_lading_kg, $grondpersoneel_aantal);
-
-        // Voer de SQL-instructie uit
-        if ($stmt->execute()) {
-            echo "Nieuwe vlucht succesvol toegevoegd";
+        if ($cargo_lading_kg === null) {
+            $stmt->bind_param("ssssssssisi", $vertrek_tijd, $aankomst_tijd, $vertrek_luchthaven, $aankomst_luchthaven, $alternatieve_luchthaven, $vliegtuig_type, $piloot1, $piloot2, $aantal_passagiers, $cargo_lading_kg, $aantal_stewardessen);
         } else {
-            echo "Error: " . $stmt->error;
+            $stmt->bind_param("ssssssssiii", $vertrek_tijd, $aankomst_tijd, $vertrek_luchthaven, $aankomst_luchthaven, $alternatieve_luchthaven, $vliegtuig_type, $piloot1, $piloot2, $aantal_passagiers, $cargo_lading_kg, $aantal_stewardessen);
         }
 
-        // Sluit de statement
+        if ($stmt->execute()) {
+            $_SESSION['success'] = "Vlucht succesvol toegevoegd!";
+        } else {
+            $_SESSION['success'] = "Error: " . $stmt->error;
+        }
+
         $stmt->close();
     } else {
         echo "Error: Unable to prepare statement.";
@@ -41,6 +45,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "Geen formuliergegevens ontvangen.";
 }
 
-// Sluit de verbinding
+header("Location: ../home.php");
 $conn->close();
 ?>
