@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Controleer of de voorbereiding is geslaagd
     if ($stmt) {
         // Bind parameters
-        $stmt->bind_param("sssssssiiii", $vertrek_tijd, $aankomst_tijd, $vertrek_luchthaven, $aankomst_luchthaven, $alternatieve_luchthaven, $vliegtuig_type, $piloot1, $piloot2, $aantal_passagiers, $aantal_stewardessen, $cargo_lading_kg, $grondpersoneel_aantal);
+        $stmt->bind_param("ssssssssiiii", $vertrek_tijd, $aankomst_tijd, $vertrek_luchthaven, $aankomst_luchthaven, $alternatieve_luchthaven, $vliegtuig_type, $piloot1, $piloot2, $aantal_passagiers, $aantal_stewardessen, $cargo_lading_kg, $grondpersoneel_aantal);
 
         // Voer de SQL-instructie uit
         if ($stmt->execute()) {

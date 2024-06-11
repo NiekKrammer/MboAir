@@ -81,7 +81,7 @@
 	<section class="boek_vlucht">
 
 		<form action="process/boek_vlucht.php" method="post">
-			<h2><i class="fa-solid fa-plus"></i> Vlucht Toevoegen</h2>
+			<h2><i class="fa-solid fa-plane-up"></i> Vlucht Toevoegen</h2>
 			<label for="vertrek_tijd">Vertrek datum</label>
 			<input type="datetime-local" id="vertrek_tijd" name="vertrek_tijd" required><br>
 			<label for="aankomst_tijd">Aankomst datum</label>
