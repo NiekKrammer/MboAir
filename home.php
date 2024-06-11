@@ -91,7 +91,7 @@
 		<form action="process/boek_vlucht.php" method="post">
 			<h2><i class="fa-solid fa-plane-up"></i> Vlucht Toevoegen</h2>
 			<label for="vertrek_tijd">Vertrek Datum</label>
-			<input type="datetime-local" name="vertrek_tijd" required><br>
+			<input type="datetime-local" name="vertrek_tijd" class="vertrek_tijd" required><br>
 			<label for="aankomst_tijd">Aankomst Datum</label>
 			<input type="datetime-local" name="aankomst_tijd" required><br>
 			<label for="vertrek_luchthaven">Vertrek Luchthaven</label>
@@ -121,18 +121,34 @@
 	</section>
 
 	<script>
-		const el = document.querySelector('.vliegtuigTypes');
-		const boxes = document.querySelectorAll('.cargo_lading');
+		// Toon/verberg cargo lading (kg) veld
+		const vliegtuigTypes = document.querySelector('.vliegtuigTypes');
+		const cargo_lading_input = document.querySelectorAll('.cargo_lading');
 
-		el.addEventListener('change', function handleChange(event) {
+		vliegtuigTypes.addEventListener('change', function handleChange(event) {
 			const selectedValue = event.target.value;
-			boxes.forEach(function(box) {
+			cargo_lading_input.forEach(function(field) {
 				if (selectedValue === 'Boeing 737-700') {
-					box.style.display = 'block';
+					field.style.display = 'block';
 				} else {
-					box.style.display = 'none';
+					field.style.display = 'none';
 				}
 			});
+		});
+
+		// Vertrek moet tussen 06:00 uur en 16:00 uur zijn
+		const vertrekTijd = document.querySelector(".vertrek_tijd");
+
+		vertrekTijd.addEventListener("input", function() {
+			let selectedTime = vertrekTijd.value;
+			let minTime = "06:00";
+			let maxTime = "16:00";
+
+			if (selectedTime < minTime || selectedTime > maxTime) {
+				vertrekTijd.setCustomValidity("Tijd moet tussen 06:00 en 16:00 liggen.");
+			} else {
+				vertrekTijd.setCustomValidity("");
+			}
 		});
 	</script>
 

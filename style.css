@@ -33,7 +33,7 @@ nav {
   margin-bottom: 40px;
 
   & img {
-    width: 150px;
+    width: 130px;
   }
   & a {
     color: #111;
@@ -118,7 +118,7 @@ input.cargo_lading {
 /* --- home.php --- */
 section.toon_vluchten {
   max-width: 1300px;
-  margin: 20px auto;
+  margin: 50px auto;
   padding: 0 30px;
 
   & h1 {
@@ -128,30 +128,30 @@ section.toon_vluchten {
 }
 
 .table-container {
-  max-height: 1200px;
-  overflow-x: auto;
-  box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
-    rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+  max-height: 700px;
+  overflow: auto;
+  box-shadow: 0 0 3px #ccccccbd;
   border-radius: 6px;
-}
 
-.table-container  table {
-  border-collapse: collapse;
-}
+  & table {
+    overflow: auto;
+    border-collapse: collapse;
+  }
 
-th {
-  background-color: #fefefe;
-  border: 1px solid #ddd;
-  color: #222;
-  padding: 8px;
-  text-align: left;
-}
+  & th {
+    background-color: #fefefe;
+    border: 1px solid #ddd;
+    color: #222;
+    padding: 8px;
+    text-align: left;
+  }
 
-td {
-  background-color: #f3f0f0;
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
+  & td {
+    background-color: #f0ecec;
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
 }
 
 section.boek_vlucht {
@@ -163,16 +163,15 @@ section.boek_vlucht {
     width: 400px;
     display: flex;
     flex-direction: column;
-    background-color: #f3f0f0;
-    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
-      rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+    background-color: #f0ecec;
+    box-shadow: 0 0 3px #ccc;
     border-radius: 6px;
     padding: 20px;
   }
 
   & h2 {
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
   }
 
   & input,
