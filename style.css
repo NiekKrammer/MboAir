@@ -194,12 +194,12 @@ section.boek_vlucht {
   }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 500px) {
   nav img {
     width: 120px;
   }
   section.boek_vlucht form {
-    width: 99%;
+    width: 100%;
   }
 }
 
