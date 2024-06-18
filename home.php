@@ -99,11 +99,11 @@
 			<label for="aankomst_tijd">Aankomst Datum</label>
 			<input type="datetime-local" name="aankomst_tijd" required><br>
 			<label for="vertrek_luchthaven">Vertrek Luchthaven</label>
-			<select class="luchthavens_select" onchange="showSelectedAirport()" name="vertrek_luchthaven" required>
+			<select class="luchthavens_select vertrek_luchthaven" onchange="showSelectedAirport()" name="vertrek_luchthaven" required>
 				<option value="" selected disabled>Kies Vertrek luchthaven</option>
 			</select><br>
 			<label for="aankomst_luchthaven">Aankomst Luchthaven</label>
-			<select class="luchthavens_select" onchange="showSelectedAirport()" name="aankomst_luchthaven" required>
+			<select class="luchthavens_select aankomst_luchthaven" onchange="showSelectedAirport()" name="aankomst_luchthaven" required>
 				<option value="" selected disabled>Kies Aankomst luchthaven</option>
 			</select><br>
 			<label for="alternatieve_luchthaven">Alternatieve Luchthaven</label>
@@ -128,6 +128,9 @@
 			<input type="submit" value="Toevoegen">
 		</form>
 
+
+			<!-- aantal passagiers weghalen pax-90 -->
+
 	</section>
 
 	<footer>
@@ -138,6 +141,6 @@
 	</script>
 	<script src="js/airports_list.js">
 	</script>
-	
+
 </body>
 </html>
