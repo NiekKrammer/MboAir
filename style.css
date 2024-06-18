@@ -42,9 +42,10 @@ nav {
 
 .success_message {
   background-color: #dff0d8;
+  box-shadow: 0 0 3px #cccccc94;
   color: #3c763d;
-  padding: 10px 15px;
   border: 1px solid #d6e9c6;
+  padding: 10px 15px;
   border-radius: 4px;
   margin-bottom: 20px;
   font-size: 16px;
@@ -60,7 +61,7 @@ input.cargo_lading {
   margin-bottom: 20px;
 }
 
-/* --- login form index.php --- */
+/* --- index.php login --- */
 .login_form {
   display: flex;
   flex-direction: column;
@@ -125,31 +126,45 @@ section.toon_vluchten {
     color: #333;
     margin-bottom: 16px;
   }
+
+  & .search_field {
+    width: 300px;
+    background-color: #f8f8f8;
+    box-shadow: 0 0 3px #cccccc80;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
 }
 
 /* --- vluchten --- */
 .table-container {
-  max-height: 700px;
+  max-height: 650px;
   overflow: auto;
   box-shadow: 0 0 3px #ccccccbd;
   border-radius: 6px;
 
   & table {
     width: 100%;
-    overflow: auto;
     border-collapse: collapse;
     background-color: white;
   }
 
-  & th, & td {
-    border: 1px solid #ddd;
+  & th {
     padding: 8px;
-    text-align: left;
+  }
+  
+  & td {
+    border: 1px solid #ccccccef;
+    padding: 8px;
   }
 
-  .first_row {
+  & .sticky {
     position: sticky;
     top: 0;
+    box-shadow: 0 0 3px #838282bd;
   }
 
   & th {
@@ -172,7 +187,7 @@ section.boek_vlucht {
     width: 400px;
     display: flex;
     flex-direction: column;
-    background-color: #f0ecec;
+    background-color: #ebe7e7;
     box-shadow: 0 0 3px #b8b7b7;
     border-radius: 6px;
     padding: 20px;
@@ -217,4 +232,3 @@ footer {
   text-align: center;
   color: #333;
 }
-

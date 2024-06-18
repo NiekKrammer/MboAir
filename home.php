@@ -25,6 +25,16 @@
 	<section class="toon_vluchten">
 		<h1><i class="fa-solid fa-plane-departure"></i> Vluchten</h1>
 
+		<input type="text" class="search_field" placeholder="Zoek naar..." onkeyup="searchTable()">
+
+		<?php
+		// Bericht na succesvol boeken
+		if (isset($_SESSION['success'])) {
+			echo '<p class="success_message">' . $_SESSION['success'] . '</p>';
+			unset($_SESSION['success']);
+		}
+		?>
+
 		<div class="table-container">
 
 			<?php
@@ -34,9 +44,10 @@
 			$result = $conn->query($sql);
 
 			if ($result->num_rows > 0) {
-				echo "<table>
-                    <tr>
+				echo "<table class='vlucthen_tabel'>
+                    <tr class='sticky'>
                         <th>ID</th>
+				        <th>Vluchtnummer</th>
                         <th>Vliegtuig Type</th>
                         <th>Vertrek Tijd</th>
                         <th>Aankomst Tijd</th>
@@ -53,6 +64,7 @@
 				while ($row = $result->fetch_assoc()) {
 					echo "<tr>
                         <td>{$row['id']}</td>
+						<td>{$row['vluchtnummer']}</td>
                         <td>{$row['vliegtuig_type']}</td>
                         <td>{$row['vertrek_tijd']}</td>
                         <td>{$row['aankomst_tijd']}</td>
@@ -79,14 +91,6 @@
 
 	<!-- boek vluchten -->
 	<section class="boek_vlucht">
-
-		<?php
-		// succes message
-		if (isset($_SESSION['success'])) {
-			echo '<p class="success_message">' . $_SESSION['success'] . '</p>';
-			unset($_SESSION['success']);
-		}
-		?>
 
 		<form action="process/boek_vlucht.php" method="post">
 			<h2><i class="fa-solid fa-plane-up"></i> Vlucht Toevoegen</h2>
@@ -130,12 +134,10 @@
 		<p>© 2024 MboAir</p>
 	</footer>
 
-
 	<script src="js/script.js">
 	</script>
 	<script src="js/airports_list.js">
 	</script>
-
+	
 </body>
-
 </html>
