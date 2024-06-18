@@ -95,11 +95,17 @@
 			<label for="aankomst_tijd">Aankomst Datum</label>
 			<input type="datetime-local" name="aankomst_tijd" required><br>
 			<label for="vertrek_luchthaven">Vertrek Luchthaven</label>
-			<input type="text" name="vertrek_luchthaven" required><br>
+			<select class="luchthavens_select" onchange="showSelectedAirport()" name="vertrek_luchthaven" required>
+				<option value="" selected disabled>Kies Vertrek luchthaven</option>
+			</select><br>
 			<label for="aankomst_luchthaven">Aankomst Luchthaven</label>
-			<input type="text" name="aankomst_luchthaven" required><br>
+			<select class="luchthavens_select" onchange="showSelectedAirport()" name="aankomst_luchthaven" required>
+				<option value="" selected disabled>Kies Aankomst luchthaven</option>
+			</select><br>
 			<label for="alternatieve_luchthaven">Alternatieve Luchthaven</label>
-			<input type="text" name="alternatieve_luchthaven"><br>
+			<select class="luchthavens_select" onchange="showSelectedAirport()" name="alternatieve_luchthaven" required>
+				<option value="" selected disabled>Kies Alternatieve luchthaven</option>
+			</select><br>
 			<label for="alternatieve_luchthaven">Selecteer Vliegtuigtype</label>
 			<select name="vliegtuig_type" class="vliegtuigTypes">
 				<option value="A320">A320</option>
@@ -124,8 +130,10 @@
 		<p>© 2024 MboAir</p>
 	</footer>
 
-	
-	<script src="script.js">
+
+	<script src="js/script.js">
+	</script>
+	<script src="js/airports_list.js">
 	</script>
 
 </body>

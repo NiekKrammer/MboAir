@@ -117,7 +117,7 @@ input.cargo_lading {
 
 /* --- home.php --- */
 section.toon_vluchten {
-  max-width: 1300px;
+  max-width: 1400px;
   margin: 50px auto;
   padding: 0 30px;
 
@@ -127,6 +127,7 @@ section.toon_vluchten {
   }
 }
 
+/* --- vluchten --- */
 .table-container {
   max-height: 700px;
   overflow: auto;
@@ -134,26 +135,34 @@ section.toon_vluchten {
   border-radius: 6px;
 
   & table {
+    width: 100%;
     overflow: auto;
     border-collapse: collapse;
+    background-color: white;
+  }
+
+  & th, & td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+
+  .first_row {
+    position: sticky;
+    top: 0;
   }
 
   & th {
     background-color: #fefefe;
-    border: 1px solid #ddd;
     color: #222;
-    padding: 8px;
-    text-align: left;
   }
 
-  & td {
-    background-color: #f0ecec;
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
+  & tr:nth-child(even) {
+    background-color: #dddddd;
   }
 }
 
+/* --- boek vlucht --- */
 section.boek_vlucht {
   max-width: 1300px;
   margin: 40px auto 20px;
@@ -164,7 +173,7 @@ section.boek_vlucht {
     display: flex;
     flex-direction: column;
     background-color: #f0ecec;
-    box-shadow: 0 0 3px #ccc;
+    box-shadow: 0 0 3px #b8b7b7;
     border-radius: 6px;
     padding: 20px;
   }
@@ -208,3 +217,4 @@ footer {
   text-align: center;
   color: #333;
 }
+

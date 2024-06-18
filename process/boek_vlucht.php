@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $cargo_lading_kg = null;
     }
     
-    // Calculate the number of stewardesses
+    // Bereken het aantal stewardessen
     $aantal_stewardessen = ceil($aantal_passagiers / 60);
 
     $stmt = $conn->prepare("INSERT INTO vluchten (vertrek_tijd, aankomst_tijd, vertrek_luchthaven, aankomst_luchthaven, alternatieve_luchthaven, vliegtuig_type, piloot1, piloot2, aantal_passagiers, cargo_lading_kg, aantal_stewardessen) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
