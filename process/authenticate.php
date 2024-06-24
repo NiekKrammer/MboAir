@@ -1,7 +1,7 @@
 <?php 
 session_start();
 
-include_once '../includes/dbconnect.php';
+require '../includes/dbconnect.php';
 
 if (isset($_POST['username'], $_POST['password'])) {
     if (empty($_POST['username']) || empty($_POST['password'])) {

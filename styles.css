@@ -52,13 +52,10 @@ nav {
   width: fit-content;
 }
 
-/* --- verberg het Cargo Lading (kg) input veld. Toon het wanneer 'Boeing 737-700' word geselecteerd --- */
-.cargo_lading {
-  display: none;
-}
-
-input.cargo_lading {
-  margin-bottom: 20px;
+/* --- Verberg/Toon cargo en passagiers velden --- */
+.cargo, .passagiers  {
+  display: flex;
+  flex-direction: column;
 }
 
 /* --- index.php login --- */
@@ -143,7 +140,7 @@ section.toon_vluchten {
 .table-container {
   max-height: 650px;
   overflow: auto;
-  box-shadow: 0 0 3px #ccccccbd;
+  box-shadow: 0 0 4px #ccccccbd;
   border-radius: 6px;
 
   & table {
@@ -188,7 +185,7 @@ section.boek_vlucht {
     display: flex;
     flex-direction: column;
     background-color: #ebe7e7;
-    box-shadow: 0 0 3px #b8b7b7;
+    box-shadow: 0 0 5px #b8b7b7;
     border-radius: 6px;
     padding: 20px;
   }
@@ -204,6 +201,11 @@ section.boek_vlucht {
     border-radius: 6px;
     padding: 8px;
   }
+
+& .passagiers {
+  display: flex;
+  flex-direction: column;
+}
 
   & input[type="submit"] {
     background-color: #387cd4;
