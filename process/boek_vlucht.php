@@ -24,8 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $piloot1 = mysqli_real_escape_string($conn, $_POST['piloot1']);
     $piloot2 = mysqli_real_escape_string($conn, $_POST['piloot2']);
     $aantal_passagiers = intval($_POST['aantal_passagiers']);
-    $cargo_lading_kg = intval($_POST['cargo_lading_kg']);
-
+    $cargo_lading_kg = isset($_POST['cargo_lading_kg']) && !empty($_POST['cargo_lading_kg']) ? mysqli_real_escape_string($conn, $_POST['cargo_lading_kg']) : 'N.V.T.';
     // bereken aantal stewardessen gebaseerd op het aantal passagiers
     $aantal_stewardessen = ceil($aantal_passagiers / 60);
 
@@ -33,8 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
     if ($stmt) {
-        // Correct bind_param call
-        $stmt->bind_param("sssssssssiii", $vluchtnummer, $vertrek_tijd, $aankomst_tijd, $vertrek_luchthaven, $aankomst_luchthaven, $alternatieve_luchthaven, $vliegtuig_type, $piloot1, $piloot2, $aantal_passagiers, $cargo_lading_kg, $aantal_stewardessen);
+        $stmt->bind_param("sssssssssisi", $vluchtnummer, $vertrek_tijd, $aankomst_tijd, $vertrek_luchthaven, $aankomst_luchthaven, $alternatieve_luchthaven, $vliegtuig_type, $piloot1, $piloot2, $aantal_passagiers, $cargo_lading_kg, $aantal_stewardessen);
 
         if ($stmt->execute()) {
             $_SESSION['success'] = '<i class="fa-solid fa-circle-check"></i> Vlucht succesvol toegevoegd!';

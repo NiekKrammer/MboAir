@@ -46,7 +46,7 @@ function searchTable() {
   var input, filter, table, tr, td, i, txtValue;
   input = document.querySelector(".search_field");
   filter = input.value.toUpperCase();
-  table = document.querySelector(".vlucthen_tabel");
+  table = document.querySelector(".vluchten_tabel");
   tr = table.getElementsByTagName("tr");
 
   // Loop door alle rijen, verberg degene die niet overeenkomen met de zoekopdracht
@@ -66,24 +66,29 @@ function searchTable() {
   }
 }
 
-// Vertrek en aankomst luchthavens kunnen niet hetzelfde zijn
-function validateAirports() {
-  const vertrekLuchthaven = document.querySelector(".vertrek_luchthaven").value;
-  const aankomstLuchthaven = document.querySelector(".aankomst_luchthaven").value;
+// Vertrek en aankomst luchthaven, piloot en copiloot mogen niet hetzelfde zijn
+document.querySelector(".flightForm").addEventListener("submit", function(event) {
+  const vertrekLuchthaven = document.getElementById("vertrek_luchthaven").value;
+  const aankomstLuchthaven = document.getElementById("aankomst_luchthaven").value;
 
+  const piloot1 = document.getElementById("piloot1").value;
+  const piloot2 = document.getElementById("piloot2").value;
+
+  // Controleer of vertrek- en aankomstluchthaven hetzelfde zijn
   if (vertrekLuchthaven === aankomstLuchthaven) {
     alert("Vertrek en aankomst luchthavens mogen niet hetzelfde zijn.");
-    return false;
+    event.preventDefault();
+    return;
   }
 
-  return true;
-}
-
-document.querySelector("form").addEventListener("submit", function (event) {
-  if (!validateAirports()) {
+  // Controleer of piloot1 en piloot2 hetzelfde zijn
+  if (piloot1 === piloot2) {
+    alert("Piloot en Copiloot mogen niet hetzelfde zijn.");
     event.preventDefault();
+    return;
   }
 });
+
 
 // Maximaal aantal passagiers per vliegtuig
 function updatePassengerLimit() {

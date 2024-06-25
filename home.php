@@ -13,7 +13,7 @@
 
     <!-- navbar -->
     <?php
-    require 'includes/dbconnect.php'; 
+    require 'includes/dbconnect.php';
 
     session_start();
     if (!isset($_SESSION['loggedin'])) {
@@ -44,7 +44,7 @@
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
-                echo "<table class='vlucthen_tabel'>
+                echo "<table class='vluchten_tabel'>
                     <tr class='sticky'>
                         <th>ID</th>
                         <th>Vluchtnummer</th>
@@ -58,8 +58,9 @@
                         <th>Copiloot</th>
                         <th>Aantal Passagiers</th>
                         <th>Aantal Stewardessen</th>
-                        <th>Cargo Lading (kg)</th>
+                        <th>Cargo Lading</th>
                         <th>Aantal Grondpersoneel</th>
+                        <th>Bewerken</th>
                     </tr>";
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>
@@ -77,6 +78,13 @@
                         <td>{$row['aantal_stewardessen']}</td>
                         <td>{$row['cargo_lading_kg']}</td>
                         <td>{$row['grondpersoneel_aantal']}</td>
+                        <td class='delete_flight_td'>
+                            <form action='process/delete_flight.php' method='post'>
+                                <input type='hidden' name='flight_id' value='{$row['id']}'>
+                                <button type='submit' onclick=\"return confirm('Weet je zeker dat je deze vlucht wilt verwijderen?');\">
+                                    <i class='fa-solid fa-trash'></i></button>
+                            </form>
+                        </td>
                       </tr>";
                 }
                 echo "</table>";
@@ -90,7 +98,7 @@
     <!-- boek vluchten -->
     <section class="boek_vlucht">
 
-        <form action="process/boek_vlucht.php" method="post">
+        <form action="process/boek_vlucht.php" method="post" class="flightForm">
             <h2><i class="fa-solid fa-plane-up"></i> Vlucht Toevoegen</h2>
 
             <label for="vertrek_tijd">Vertrek Datum</label>
@@ -100,17 +108,17 @@
             <input type="datetime-local" name="aankomst_tijd" id="aankomst_tijd" required><br>
 
             <label for="vertrek_luchthaven">Vertrek Luchthaven</label>
-            <select class="luchthavens_select vertrek_luchthaven" id="vertrek_luchthaven" onchange="showSelectedAirport()" name="vertrek_luchthaven" required>
-                <option value="" selected disabled>Kies Vertrek luchthaven</option>
+            <select class="luchthavens_select" id="vertrek_luchthaven" name="vertrek_luchthaven" required>
+                <option value="Rotterdam Airport" selected>Rotterdam Airport</option>
             </select><br>
 
             <label for="aankomst_luchthaven">Aankomst Luchthaven</label>
-            <select class="luchthavens_select aankomst_luchthaven" id="aankomst_luchthaven" onchange="showSelectedAirport()" name="aankomst_luchthaven" required>
+            <select class="luchthavens_select" id="aankomst_luchthaven" name="aankomst_luchthaven" required>
                 <option value="" selected disabled>Kies Aankomst luchthaven</option>
             </select><br>
 
             <label for="alternatieve_luchthaven">Alternatieve Luchthaven</label>
-            <select class="luchthavens_select" id="alternatieve_luchthaven" onchange="showSelectedAirport()" name="alternatieve_luchthaven" required>
+            <select class="luchthavens_select" id="alternatieve_luchthaven" name="alternatieve_luchthaven" required>
                 <option value="" selected disabled>Kies Alternatieve luchthaven</option>
             </select><br>
 
@@ -152,7 +160,7 @@
                 }
                 ?>
             </select><br>
-			
+
             <div class="passagiers">
                 <label for="aantal_passagiers">Aantal Passagiers</label>
                 <input type="number" name="aantal_passagiers" id="aantal_passagiers" value="0" class="aantal_passagiers"><br>
@@ -172,13 +180,12 @@
         <p>© 2024 MboAir</p>
     </footer>
 
-	<script src="js/script.js"></script>
+    <script src="js/script.js"></script>
     <script src="js/airports_list.js"></script>
 </body>
 
 </html>
 
 <?php
-// Sluit de databaseverbinding
-$conn->close(); 
+$conn->close();
 ?>

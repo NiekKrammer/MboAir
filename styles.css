@@ -143,7 +143,7 @@ section.toon_vluchten {
   box-shadow: 0 0 4px #ccccccbd;
   border-radius: 6px;
 
-  & table {
+  & .vluchten_tabel {
     width: 100%;
     border-collapse: collapse;
     background-color: white;
@@ -172,7 +172,17 @@ section.toon_vluchten {
   & tr:nth-child(even) {
     background-color: #dddddd;
   }
+
+  & .delete_flight_td {
+    text-align: center;
+  }
+  
+  & .delete_flight_td i {
+    padding: 6px;
+    cursor: pointer;
+  }
 }
+
 
 /* --- boek vlucht --- */
 section.boek_vlucht {
@@ -185,7 +195,7 @@ section.boek_vlucht {
     display: flex;
     flex-direction: column;
     background-color: #ebe7e7;
-    box-shadow: 0 0 5px #b8b7b7;
+    box-shadow: 0 0 3px #b8b7b7;
     border-radius: 6px;
     padding: 20px;
   }
