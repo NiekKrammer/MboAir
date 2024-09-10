@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const airports = [
         {"name": "Amsterdam, Netherlands"},
-        {"name": "Rotterdam, Netherlands"},
         {"name": "Athens, Greece"},
         {"name": "Barcelona, Spain"},
         {"name": "Berlin, Germany"},
